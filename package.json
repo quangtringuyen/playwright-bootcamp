@@ -1,0 +1,50 @@
+{
+  "name": "playwright-bootcamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test":"playwright test",
+    "clean": "npm run clean:results && npm run clean:modules",
+    "clean:modules": "rimraf ./node_modules",
+    "clean:results": "rimraf ./playwright-report ./playwright-blob-report  ./playwright-monocart-report ./playwright-allure-results ./playwright-allure-reports ./test-results",
+    "test:sanity": "playwright test --grep @sanity",
+    "docker:build": "docker build . -t e2e-playwright",
+    "allure:generate": "allure generate playwright-allure-results -o playwright-allure-report --clean",
+    "allure:open": "allure open playwright-allure-report",
+    "merge:report:playwright": "tsx merge-playwright-reports.ts",
+    "merge:report:monocart": "tsx merge-monocart-reports.ts",
+    "update:playwright": "playwright install --with-deps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quangtringuyen/playwright-bootcamp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quangtringuyen/playwright-bootcamp/issues"
+  },
+  "homepage": "https://github.com/quangtringuyen/playwright-bootcamp#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^24.1.0",
+     "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.17.0",
+    "@faker-js/faker": "^9.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
+    "allure-commandline": "^2.32.0",
+    "allure-playwright": "^3.0.7",
+    "eslint": "^9.17.0",
+    "eslint-js": "github:eslint/js",
+    "faker": "^6.6.6",
+    "monocart-reporter": "^2.9.12",
+    "playwright": "^1.49.1",
+    "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
