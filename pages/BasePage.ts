@@ -1,8 +1,16 @@
-import { test, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 export class BasePage {
     readonly page: Page;
 
     constructor(page: Page) {
         this.page = page;
+    }
+
+    async navigateTo(url: string) {
+        await this.page.goto(url);
+    }
+
+    async getPageTitle() {
+        return await this.page.title();
     }
 }
