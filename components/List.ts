@@ -14,4 +14,8 @@ export class List extends BaseElement {
     async getCount() {
         return await this.locator.locator('li').count();
     }
+
+    async selectOption(value: string) {
+        await this.locator.selectOption(value);
+    }
 }
