@@ -1,19 +1,22 @@
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { SearchPage } from '../pages/SearchPage';
-import { expectElement } from '../utils/Expect';
+import { NavBar } from '../components/NavBar';
 
 test('search functionality', async ({ page }) => {
     const homePage = new HomePage(page);
     const searchPage = new SearchPage(page);
+    const navBar = new NavBar(page);
     const searchText = 'mouse';
 
     await homePage.navigateTo();
 
-    await homePage.searchFor(searchText);
+    await navBar.searchFor(searchText);
+    await expect(searchPage.resultLabel).toBeAttached();
+    await navBar.closeSearch();
 
-    await expectElement(searchPage.resultLabel).toBeVisible();
-    await expectElement(searchPage.resultLabel).toHaveText(`Search result: "${searchText}"`);
-    await expectElement(searchPage.productList).toBeVisible();
-    await expectElement(searchPage.productList).toHaveCount(6);
+    await expect(searchPage.resultLabel).toBeVisible();
+    await expect(searchPage.resultLabel).toHaveText(`Search result: "${searchText}"`);
+    await expect(searchPage.productList).toBeVisible();
+    expect(await searchPage.productItem.count()).toEqual(6);
 });
