@@ -1,4 +1,4 @@
-import { Page } from 'playwright';
+import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 type CreateAccountFormData = {
@@ -24,7 +24,6 @@ export class CreateAccountPage extends BasePage {
     readonly firstNameInput = this.page.locator('input[name="first_nameRegisterPage"]');
     readonly lastNameInput = this.page.locator('input[name="last_nameRegisterPage"]');
     readonly phoneNumberInput = this.page.locator('input[name="phone_numberRegisterPage"]');
-    readonly createAccountButton = this.page.locator('button[name="register_btn"]');
     readonly countryDropdown = this.page.locator('select[name="countryListboxRegisterPage"]');
     readonly cityInput = this.page.locator('input[name="cityRegisterPage"]');
     readonly addressInput = this.page.locator('input[name="addressRegisterPage"]');
