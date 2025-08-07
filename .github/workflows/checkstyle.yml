@@ -1,0 +1,22 @@
+name: TypeScript Checkstyle Analysis
+
+on: [push, pull_request]
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+            - name: Install dependencies
+              run: npm ci
+            - name: Run ESLint and generate Checkstyle report
+              run: npx eslint --format checkstyle --output-file eslint-report.xml . || true
+              # The '|| true' ensures the workflow doesn't fail immediately on linting errors,
+              # allowing the Checkstyle action to still process the report.
+            - name: Publish Checkstyle report
+              uses: jwgmeligmeyling/checkstyle-github-action@v1
+              with:
+                  path: eslint-report.xml
