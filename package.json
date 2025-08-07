@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
-    "test:chrome": "playwright test --project=chromium",
+    "test": "npx playwright test",
+    "test:chrome": "npx playwright test --project=chromium",
     "clean": "npm run clean:results && npm run clean:modules",
     "clean:modules": "rimraf ./node_modules",
     "clean:results": "rimraf ./playwright-report ./playwright-blob-report  ./playwright-monocart-report ./playwright-allure-results ./playwright-allure-reports ./test-results",
