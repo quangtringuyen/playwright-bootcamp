@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { HomePage } from '../pages/HomePage';
-import { SearchPage } from '../pages/SearchPage';
-import { NavBar } from '../components/NavBar';
+import { HomePage } from '../../pages/HomePage';
+import { SearchPage } from '../../pages/SearchPage';
+import { NavBar } from '../../components/NavBar';
 
 test('search functionality', async ({ page }) => {
     const homePage = new HomePage(page);

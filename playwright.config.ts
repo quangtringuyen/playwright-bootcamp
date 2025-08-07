@@ -10,8 +10,6 @@ import { defineConfig, devices } from '@playwright/test';
 
 function getBaseUrl() {
     const environment = process.env.ENV;
-    if (environment == undefined || environment == null) return 'https://advantageonlineshopping.com/';
-    else if (environment == 'prod') return 'https://advantageonlineshopping.com/';
 
     switch (environment) {
         case 'prod':
@@ -43,6 +41,9 @@ function getBaseUrl() {
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+    //Global Setup to run before all tests
+    globalSetup: "./global-setup",
+
     testDir: './tests',
     /* Run tests in files in parallel */
     fullyParallel: true,
@@ -53,7 +54,8 @@ export default defineConfig({
     /* Opt out of parallel tests on CI. */
     workers: process.env.CI ? 1 : undefined,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    reporter: 'html',
+    // reporter: 'html',
+    reporter: [["line"], ["allure-playwright"]],
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     expect: {
         timeout: 10000,
@@ -105,6 +107,7 @@ export default defineConfig({
         //   name: 'Google Chrome',
         //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
         // },
+        
     ],
 
     /* Run your local dev server before starting the tests */
@@ -113,4 +116,5 @@ export default defineConfig({
     //   url: 'http://localhost:3000',
     //   reuseExistingServer: !process.env.CI,
     // },
+    
 });
