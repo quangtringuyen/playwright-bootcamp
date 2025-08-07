@@ -1,9 +1,9 @@
 name: Playwright Tests
 on:
     push:
-        branches: [main, develop]
+
     pull_request:
-        branches: [main, develop]
+
 # Define the jobs to run in this workflow
 jobs:
     # Define a job named 'build'
@@ -65,7 +65,7 @@ jobs:
 
             # Step to upload artifact
             - name: Upload artifact
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v4
               with:
                   name: html-report
                   path: html-report.zip
