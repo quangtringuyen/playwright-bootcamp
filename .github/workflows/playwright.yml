@@ -44,20 +44,25 @@ jobs:
               # This step should always run, even if previous steps fail
               if: always()
 
+            - name: Generate Allure report
+              run: npm run allure:generate
+              # This step should always run, even if previous steps fail
+              if: always()
+
             # Check if HTML report exists
-            - name: Check if HTML report exists
+            - name: Check if Allure report exists
               run: |
-                  if [ -d "html-report" ]; then
-                    echo "HTML report exists."
+                  if [ -d "playwright-allure-report" ]; then
+                    echo "Allure report exists."
                   else
-                    echo "HTML report does not exist. Exiting..."
+                    echo "Allure report does not exist. Exiting..."
                     exit 1
                   fi
               if: always()
 
             # Step to zip html-report folder
-            - name: Zip HTML report
-              run: zip -r html-report.zip html-report
+            - name: Zip allure report
+              run: zip -r playwright-allure-report.zip playwright-allure-report
               # This step should always run, even if previous steps fail
               if: always()
 
@@ -65,8 +70,8 @@ jobs:
             - name: Upload artifact
               uses: actions/upload-artifact@v4
               with:
-                  name: html-report
-                  path: html-report.zip
+                  name: playwright-allure-report
+                  path: playwright-allure-report.zip
                   if-no-files-found: error
               if: always()
 
