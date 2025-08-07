@@ -1,24 +1,29 @@
-import { Locator, Page } from '@playwright/test';
+import { Page } from 'playwright';
 import { BasePage } from './BasePage';
+import { TextInput } from '../components/TextInput';
+import { PageTitle } from '../components/PageTitle';
+import { Button } from '../components/Button';
+import { List } from '../components/List';
+import { CheckBox } from '../components/CheckBox';
 
 export class CreateAccountPage extends BasePage {
-    readonly pageTitle: Locator;
-    readonly usernameInput: Locator;
-    readonly emailInput: Locator;
-    readonly passwordInput: Locator;
-    readonly confirmPasswordInput: Locator;
-    readonly firstNameInput: Locator;
-    readonly lastNameInput: Locator;
-    readonly phoneNumberInput: Locator;
-    readonly createAccountButton: Locator;
-    readonly countryDropdown: Locator;
-    readonly cityInput: Locator;
-    readonly addressInput: Locator;
-    readonly stateInput: Locator;
-    readonly postalCodeInput: Locator;
-    readonly allowOffersCheckbox: Locator;
-    readonly agreeTermsCheckbox: Locator;
-    readonly registerButton: Locator;
+    readonly pageTitle = new PageTitle(this.page.locator('h3[translate="CREATE_ACCOUNT"]'));
+    readonly usernameInput = new TextInput(this.page.locator('input[name="usernameRegisterPage"]'));
+    readonly emailInput = new TextInput(this.page.locator('input[name="emailRegisterPage"]'));
+    readonly passwordInput = new TextInput(this.page.locator('input[name="passwordRegisterPage"]'));
+    readonly confirmPasswordInput = new TextInput(this.page.locator('input[name="confirm_passwordRegisterPage"]'));
+    readonly firstNameInput = new TextInput(this.page.locator('input[name="first_nameRegisterPage"]'));
+    readonly lastNameInput = new TextInput(this.page.locator('input[name="last_nameRegisterPage"]'));
+    readonly phoneNumberInput = new TextInput(this.page.locator('input[name="phone_numberRegisterPage"]'));
+    readonly createAccountButton = new Button(this.page.locator('button[name="register_btn"]'));
+    readonly countryDropdown = new List(this.page.locator('select[name="countryListboxRegisterPage"]'));
+    readonly cityInput = new TextInput(this.page.locator('input[name="cityRegisterPage"]'));
+    readonly addressInput = new TextInput(this.page.locator('input[name="addressRegisterPage"]'));
+    readonly stateInput = new TextInput(this.page.locator('input[name="state_/_province_/_regionRegisterPage"]'));
+    readonly postalCodeInput = new TextInput(this.page.locator('input[name="postal_codeRegisterPage"]'));
+    readonly allowOffersCheckbox = new CheckBox(this.page.locator('input[name="allowOffersPromotion"]'));
+    readonly agreeTermsCheckbox = new CheckBox(this.page.locator('input[name="i_agree"]'));
+    readonly registerButton = new Button(this.page.locator('#register_btn'));
 
     constructor(page: Page) {
         super(page);
@@ -54,13 +59,13 @@ export class CreateAccountPage extends BasePage {
         state: string,
         postalCode: string,
     ) {
-        await this.usernameInput.fill(userName);
-        await this.emailInput.fill(email);
-        await this.passwordInput.fill(password);
-        await this.confirmPasswordInput.fill(password);
-        await this.firstNameInput.fill(firstName);
-        await this.lastNameInput.fill(lastName);
-        await this.phoneNumberInput.fill(phoneNumber);
+        await this.usernameInput.type(userName);
+        await this.emailInput.type(email);
+        await this.passwordInput.type(password);
+        await this.confirmPasswordInput.type(password);
+        await this.firstNameInput.type(firstName);
+        await this.lastNameInput.type(lastName);
+        await this.phoneNumberInput.type(phoneNumber);
         await this.countryDropdown.selectOption(country);
         await this.cityInput.fill(city);
         await this.addressInput.fill(address);
