@@ -35,10 +35,8 @@ jobs:
 
             # Step to run tests with qa as environment variable similarly we can define qa|dev|qaApi|devApi
             - name: Run tests
-              run: npm run test
-              env:
-                  test_env: 'goalpha'
-
+              run: npm run test:chrome
+              
             # Step to wait for the job to complete
             - name: Wait for job completion
               # Adjust the wait time as needed
